@@ -42,7 +42,7 @@ entity ProductOrder {
 
 relationship ManyToOne {
   Product{category(name)} to ProductCategory,
-  CustomerDetails{user(login)} to User
+  CustomerDetails{user(login)} to User with builtInEntity
 }
 
 relationship OneToOne {

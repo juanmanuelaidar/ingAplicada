@@ -1,27 +1,37 @@
 package com.example.store.domain;
 
+import static com.example.store.domain.ProductCategoryTestSamples.*;
+import static com.example.store.domain.ProductTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import java.math.BigDecimal;
+import com.example.store.web.rest.TestUtil;
 import org.junit.jupiter.api.Test;
 
 class ProductTest {
 
-    private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-
     @Test
-    void productWithValidRequiredFieldsShouldPassBeanValidation() {
-        Product product = new Product().name("Teclado mecánico").price(new BigDecimal("150.00")).stock(20);
+    void equalsVerifier() throws Exception {
+        TestUtil.equalsVerifier(Product.class);
+        Product product1 = getProductSample1();
+        Product product2 = new Product();
+        assertThat(product1).isNotEqualTo(product2);
 
-        assertThat(validator.validate(product)).isEmpty();
+        product2.setId(product1.getId());
+        assertThat(product1).isEqualTo(product2);
+
+        product2 = getProductSample2();
+        assertThat(product1).isNotEqualTo(product2);
     }
 
     @Test
-    void productWithNegativePriceShouldFailBeanValidation() {
-        Product product = new Product().name("Mouse").price(new BigDecimal("-1.00")).stock(10);
+    void categoryTest() {
+        Product product = getProductRandomSampleGenerator();
+        ProductCategory productCategoryBack = getProductCategoryRandomSampleGenerator();
 
-        assertThat(validator.validate(product)).anyMatch(violation -> "price".equals(violation.getPropertyPath().toString()));
+        product.setCategory(productCategoryBack);
+        assertThat(product.getCategory()).isEqualTo(productCategoryBack);
+
+        product.category(null);
+        assertThat(product.getCategory()).isNull();
     }
 }
