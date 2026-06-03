@@ -25,19 +25,19 @@ Este documento deja explícito que el proyecto está **100% implementado** y lis
 ### 1. Backend y Tests
 ```bash
 cd backend
-./mvnw clean test          # Ejecuta tests unitarios
-npm install && npm run cy:run  # Ejecuta tests E2E Cypress
+./mvnw clean test         
+npm install && npm run cy:run 
 ```
 
 ### 2. Infraestructura y Despliegue
 ```bash
 cd docker
-docker compose up -d       # Levanta DB + ELK + App
+docker compose up -d       
 ```
 
 ### 3. Frontend Mobile
 ```bash
 cd mobile
 npm install
-npm run build              # Genera la PWA en la carpeta /www
+npm run build              
 ```
