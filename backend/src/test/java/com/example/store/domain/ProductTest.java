@@ -5,9 +5,14 @@ import static com.example.store.domain.ProductTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.store.web.rest.TestUtil;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
 class ProductTest {
+
+    private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     @Test
     void equalsVerifier() throws Exception {
@@ -33,5 +38,25 @@ class ProductTest {
 
         product.category(null);
         assertThat(product.getCategory()).isNull();
+    }
+
+    @Test
+    void shouldAcceptProductWithRequiredBusinessFields() {
+        Product product = validProduct();
+
+        assertThat(validator.validate(product)).isEmpty();
+    }
+
+    @Test
+    void shouldRejectInvalidProductBusinessFields() {
+        Product product = validProduct().name("A").price(new BigDecimal("-0.01")).stock(-1);
+
+        assertThat(validator.validate(product))
+            .extracting(violation -> violation.getPropertyPath().toString())
+            .contains("name", "price", "stock");
+    }
+
+    private static Product validProduct() {
+        return new Product().name("Notebook").price(new BigDecimal("1200.00")).stock(8);
     }
 }

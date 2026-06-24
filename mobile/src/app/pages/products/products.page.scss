@@ -1,0 +1,25 @@
+.empty-state {
+  display: grid;
+  min-height: 70vh;
+  place-items: center;
+  align-content: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+  color: #334155;
+}
+
+.empty-state ion-icon {
+  color: var(--ion-color-primary);
+  font-size: 48px;
+}
+
+.empty-state h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.empty-state p {
+  margin: 0;
+}

@@ -6,11 +6,16 @@ import static com.example.store.domain.ShoppingCartTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.store.web.rest.TestUtil;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class ShoppingCartTest {
+
+    private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     @Test
     void equalsVerifier() throws Exception {
@@ -58,5 +63,21 @@ class ShoppingCartTest {
         shoppingCart.setOrders(new HashSet<>());
         assertThat(shoppingCart.getOrders()).doesNotContain(productOrderBack);
         assertThat(productOrderBack.getCart()).isNull();
+    }
+
+    @Test
+    void shouldRequireCreationDateAndStatus() {
+        ShoppingCart shoppingCart = new ShoppingCart();
+
+        assertThat(validator.validate(shoppingCart))
+            .extracting(violation -> violation.getPropertyPath().toString())
+            .contains("createdDate", "status");
+    }
+
+    @Test
+    void shouldAcceptCartWithRequiredFields() {
+        ShoppingCart shoppingCart = new ShoppingCart().createdDate(Instant.parse("2026-06-12T00:00:00Z")).status("OPEN");
+
+        assertThat(validator.validate(shoppingCart)).isEmpty();
     }
 }

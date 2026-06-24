@@ -1,0 +1,17 @@
+{
+  "name": "Store Mobile",
+  "short_name": "Store",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b5563",
+  "description": "Cliente Ionic PWA para consumir la API JHipster de Store.",
+  "icons": [
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
