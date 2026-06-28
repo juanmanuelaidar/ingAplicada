@@ -1,7 +1,6 @@
 import React from 'react';
 import { Translate, ValidatedField, translate } from 'react-jhipster';
 import { Alert, Button, Col, Form, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import { type FieldError, useForm } from 'react-hook-form';
 
 export interface ILoginModalProps {
@@ -82,17 +81,7 @@ const LoginModal = (props: ILoginModalProps) => {
           </Row>
           <div className="mt-1">&nbsp;</div>
           <Alert color="warning">
-            <Link to="/account/reset/request" data-cy="forgetYourPasswordSelector">
-              <Translate contentKey="login.password.forgot">Did you forget your password?</Translate>
-            </Link>
-          </Alert>
-          <Alert color="warning">
-            <span>
-              <Translate contentKey="global.messages.info.register.noaccount">You don&apos;t have an account yet?</Translate>
-            </span>{' '}
-            <Link to="/account/register">
-              <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>
-            </Link>
+            El acceso es administrado. Usa los usuarios demo de la entrega o solicita el alta a un administrador.
           </Alert>
         </ModalBody>
         <ModalFooter>

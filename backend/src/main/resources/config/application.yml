@@ -60,9 +60,6 @@ management:
       mode: full
     env:
       enabled: true
-  health:
-    mail:
-      enabled: false # When using the MailService, configure an SMTP server and set this to true
   prometheus:
     metrics:
       export:
@@ -161,8 +158,6 @@ spring:
       thread-name-prefix: store-scheduling-
       pool:
         size: 2
-  thymeleaf:
-    mode: HTML
   output:
     ansi:
       console-available: true
@@ -198,8 +193,6 @@ jhipster:
   #   exposed-headers: "Authorization,Link,X-Total-Count,X-${jhipster.clientApp.name}-alert,X-${jhipster.clientApp.name}-error,X-${jhipster.clientApp.name}-params"
   #   allow-credentials: true
   #   max-age: 1800
-  mail:
-    from: store@localhost
   api-docs:
     default-include-pattern: /api/**
     management-include-pattern: /management/**

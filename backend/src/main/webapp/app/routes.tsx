@@ -4,10 +4,6 @@ import { Route } from 'react-router';
 import Loadable from 'react-loadable';
 
 import Login from 'app/modules/login/login';
-import Register from 'app/modules/account/register/register';
-import Activate from 'app/modules/account/activate/activate';
-import PasswordResetInit from 'app/modules/account/password-reset/init/password-reset-init';
-import PasswordResetFinish from 'app/modules/account/password-reset/finish/password-reset-finish';
 import Logout from 'app/modules/login/logout';
 import Home from 'app/modules/home/home';
 import EntitiesRoutes from 'app/entities/routes';
@@ -43,12 +39,6 @@ const AppRoutes = () => {
               </PrivateRoute>
             }
           />
-          <Route path="register" element={<Register />} />
-          <Route path="activate" element={<Activate />} />
-          <Route path="reset">
-            <Route path="request" element={<PasswordResetInit />} />
-            <Route path="finish" element={<PasswordResetFinish />} />
-          </Route>
         </Route>
         <Route
           path="admin/*"

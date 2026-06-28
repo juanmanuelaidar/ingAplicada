@@ -4,7 +4,6 @@ import com.example.store.config.Constants;
 import com.example.store.domain.User;
 import com.example.store.repository.UserRepository;
 import com.example.store.security.AuthoritiesConstants;
-import com.example.store.service.MailService;
 import com.example.store.service.UserService;
 import com.example.store.service.dto.AdminUserDTO;
 import com.example.store.web.rest.errors.BadRequestAlertException;
@@ -84,20 +83,15 @@ public class UserResource {
 
     private final UserRepository userRepository;
 
-    private final MailService mailService;
-
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+    public UserResource(UserService userService, UserRepository userRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
-        this.mailService = mailService;
     }
 
     /**
      * {@code POST  /admin/users}  : Creates a new user.
      * <p>
-     * Creates a new user if the login and email are not already used, and sends a
-     * mail with an activation link.
-     * The user needs to be activated on creation.
+     * Creates a new active user if the login and email are not already used.
      *
      * @param userDTO the user to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new user, or with status {@code 400 (Bad Request)} if the login or email is already in use.
@@ -118,7 +112,6 @@ public class UserResource {
             throw new EmailAlreadyUsedException();
         } else {
             User newUser = userService.createUser(userDTO);
-            mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/admin/users/" + newUser.getLogin()))
                 .headers(HeaderUtil.createAlert(applicationName, "userManagement.created", newUser.getLogin()))
                 .body(newUser);

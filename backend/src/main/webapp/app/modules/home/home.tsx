@@ -29,14 +29,9 @@ export const Home = () => {
                 </Button>
               </>
             ) : (
-              <>
-                <Button tag={Link} to="/login" color="primary">
-                  Iniciar sesion
-                </Button>
-                <Button tag={Link} to="/account/register" color="secondary" outline>
-                  Crear cuenta
-                </Button>
-              </>
+              <Button tag={Link} to="/login" color="primary">
+                Iniciar sesion
+              </Button>
             )}
           </div>
         </Col>
