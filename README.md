@@ -9,7 +9,7 @@ Aplicacion e-commerce con backend JHipster, frontend principal Ionic/PWA, tests 
 - `mobile/`: frontend principal Ionic/Angular PWA que consume la API JHipster.
 - `docker/`: deploy con app, PostgreSQL, Elasticsearch, Logstash y Kibana.
 - `Jenkinsfile`: pipeline CI/CD para build, tests, Docker build y Docker push.
-- `correr.md`: guia corta para correr y validar la entrega.
+- `docs/correr.md`: guia corta para correr y validar la entrega.
 
 ## Como correr
 
@@ -33,7 +33,7 @@ URLs:
 - API/JHipster: http://localhost:8080
 - Kibana: http://localhost:5601
 
-Para mas detalle, ver `correr.md`.
+Para mas detalle, ver `docs/correr.md`.
 
 ## Validacion completa
 

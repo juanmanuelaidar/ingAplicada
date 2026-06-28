@@ -21,4 +21,4 @@ make docker-build
 make deploy
 ```
 
-Ver tambien `../README.md` y `../correr.md`.
+Ver tambien `../README.md` y `../docs/correr.md`.
