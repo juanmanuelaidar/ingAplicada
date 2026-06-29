@@ -12,6 +12,12 @@ services:
       - SPRING_DATASOURCE_PASSWORD=store
       - JHIPSTER_LOGGING_LOGSTASH_HOST=logstash
       - JHIPSTER_LOGGING_LOGSTASH_PORT=5000
+      - JHIPSTER_CORS_ALLOWED_ORIGINS=http://localhost:8100,http://127.0.0.1:8100
+      - JHIPSTER_CORS_ALLOWED_METHODS=*
+      - JHIPSTER_CORS_ALLOWED_HEADERS=*
+      - JHIPSTER_CORS_EXPOSED_HEADERS=Authorization,Link,X-Total-Count,X-storeApp-alert,X-storeApp-error,X-storeApp-params
+      - JHIPSTER_CORS_ALLOW_CREDENTIALS=true
+      - JHIPSTER_CORS_MAX_AGE=1800
     depends_on:
       - postgres
       - logstash

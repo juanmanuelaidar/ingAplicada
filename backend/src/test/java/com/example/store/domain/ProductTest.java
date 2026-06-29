@@ -14,6 +14,8 @@ class ProductTest {
 
     private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
+    // Verifica la logica de igualdad de Product: dos productos son iguales cuando
+    // comparten el mismo id, y distintos cuando no tienen id o tienen ids diferentes.
     @Test
     void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(Product.class);
@@ -28,6 +30,8 @@ class ProductTest {
         assertThat(product1).isNotEqualTo(product2);
     }
 
+    // Verifica la relacion Product -> ProductCategory: permite asignar una categoria,
+    // recuperarla desde el producto y luego quitarla dejandola en null.
     @Test
     void categoryTest() {
         Product product = getProductRandomSampleGenerator();
@@ -40,6 +44,8 @@ class ProductTest {
         assertThat(product.getCategory()).isNull();
     }
 
+    // Verifica que un producto con los campos de negocio obligatorios y validos
+    // pase las validaciones Jakarta sin errores.
     @Test
     void shouldAcceptProductWithRequiredBusinessFields() {
         Product product = validProduct();
@@ -47,6 +53,8 @@ class ProductTest {
         assertThat(validator.validate(product)).isEmpty();
     }
 
+    // Verifica que las reglas de negocio rechacen un producto invalido:
+    // nombre demasiado corto, precio negativo y stock negativo.
     @Test
     void shouldRejectInvalidProductBusinessFields() {
         Product product = validProduct().name("A").price(new BigDecimal("-0.01")).stock(-1);

@@ -1,3 +1,7 @@
+// APIs/rutas consumidas por este test:
+// - POST /api/authenticate: obtiene el JWT de sesion usando el helper cy.loginByApi.
+// - POST /api/products: crea un producto autenticado con Authorization: Bearer <jwt>.
+
 describe('Create product', () => {
   // Verifica el flujo E2E de creacion de un producto usando un usuario autenticado.
   // Primero obtiene el JWT por API y despues valida que POST /api/products cree el recurso.

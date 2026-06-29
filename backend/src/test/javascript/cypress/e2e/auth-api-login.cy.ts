@@ -1,3 +1,6 @@
+// APIs/rutas consumidas por este test:
+// - POST /api/authenticate: valida credenciales y devuelve el JWT de sesion.
+
 describe('API login', () => {
   // Verifica que el login contra /api/authenticate devuelve un JWT valido
   // y que la app lo guarda en localStorage para mantener la sesion.

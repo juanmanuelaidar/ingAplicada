@@ -17,6 +17,8 @@ class ShoppingCartTest {
 
     private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
+    // Verifica la logica de igualdad de ShoppingCart: dos carritos son iguales cuando
+    // comparten el mismo id, y distintos cuando no tienen id o tienen ids diferentes.
     @Test
     void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(ShoppingCart.class);
@@ -31,6 +33,8 @@ class ShoppingCartTest {
         assertThat(shoppingCart1).isNotEqualTo(shoppingCart2);
     }
 
+    // Verifica la relacion ShoppingCart -> CustomerDetails: permite asociar un cliente,
+    // leerlo desde el carrito y luego quitarlo dejandolo en null.
     @Test
     void customerTest() {
         ShoppingCart shoppingCart = getShoppingCartRandomSampleGenerator();
@@ -43,6 +47,8 @@ class ShoppingCartTest {
         assertThat(shoppingCart.getCustomer()).isNull();
     }
 
+    // Verifica la relacion bidireccional entre ShoppingCart y ProductOrder.
+    // Al agregar ordenes, la orden apunta al carrito; al removerlas, la referencia se limpia.
     @Test
     void ordersTest() {
         ShoppingCart shoppingCart = getShoppingCartRandomSampleGenerator();
@@ -65,6 +71,8 @@ class ShoppingCartTest {
         assertThat(productOrderBack.getCart()).isNull();
     }
 
+    // Verifica que un carrito sin fecha de creacion ni estado no sea valido,
+    // porque ambos campos son requeridos por las validaciones del dominio.
     @Test
     void shouldRequireCreationDateAndStatus() {
         ShoppingCart shoppingCart = new ShoppingCart();
@@ -74,6 +82,8 @@ class ShoppingCartTest {
             .contains("createdDate", "status");
     }
 
+    // Verifica que un carrito con fecha de creacion y estado validos
+    // pase las validaciones Jakarta sin errores.
     @Test
     void shouldAcceptCartWithRequiredFields() {
         ShoppingCart shoppingCart = new ShoppingCart().createdDate(Instant.parse("2026-06-12T00:00:00Z")).status("OPEN");
